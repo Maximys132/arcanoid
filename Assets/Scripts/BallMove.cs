@@ -23,13 +23,14 @@ public class BallMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         //collision.();
-        if (collision.tag == "Respawn")
+        if (collision.CompareTag("Respawn"))
         {
             UnityEngine.Debug.Log("ladida");
         }
-        if (collision.tag == "Brick")
+        if (collision.CompareTag("Player"))
         {
             //collision.
+            //rg.velocity = rg.velocity * speed;
         }
     }
 }

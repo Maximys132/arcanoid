@@ -15,12 +15,14 @@ public class BallMove : MonoBehaviour
     //private float maxAngleInterval = 0.67f;
     private Rigidbody2D rbPlatform;
     private bool isStarted;
+    private LevelsRule lvlRule;
 
     // Start is called before the first frame update
     void Start()
     {
         rbPlatform = platform.GetComponent<Rigidbody2D>();
         rg = GetComponent<Rigidbody2D>();
+        lvlRule = GetComponent<LevelsRule>();
         isStarted = true;
         /*Vector2 dir = Vector2.up;
         dir.x = UnityEngine.Random.Range(-maxAngleInterval, maxAngleInterval);
@@ -31,7 +33,8 @@ public class BallMove : MonoBehaviour
     {
         if (collision.CompareTag("Respawn"))
         {
-            UnityEngine.Debug.Log("ladida");
+            lvlRule.BallFall();
+            //UnityEngine.Debug.Log("ladida");
             isStarted = true;
         }
         if (collision.CompareTag("Player"))

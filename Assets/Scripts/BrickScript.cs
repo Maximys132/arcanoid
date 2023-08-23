@@ -10,7 +10,8 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-
+        anim.CrossFade("Shining", 0, 0, UnityEngine.Random.Range(0, 2f));
+        anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
     }
 
     void FixedUpdate() 
@@ -25,7 +26,12 @@ public class NewBehaviourScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball")) 
         {
             anim.SetInteger("health", 0);
-            GetComponent<Collider2D>().enabled = false;
+            anim.speed = 2f;
         }
+    }
+
+    void brickBreak()
+    {
+        GetComponent<Collider2D>().enabled = false;
     }
 }

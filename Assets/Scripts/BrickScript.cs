@@ -6,12 +6,17 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
 
+    public GameObject lrObj;
+
     private Animator anim;
+    private LevelsRule lvlRule;
     void Start()
     {
         anim = GetComponent<Animator>();
         anim.CrossFade("Shining", 0, 0, UnityEngine.Random.Range(0, 2f));
         anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
+        lvlRule = lrObj.GetComponent<LevelsRule>();
+        //lvlRule = 
     }
 
     void FixedUpdate() 
@@ -27,6 +32,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             anim.SetInteger("health", 0);
             anim.speed = 2f;
+            lvlRule.BrickDown();
         }
     }
 

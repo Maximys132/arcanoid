@@ -10,6 +10,7 @@ public class BallMove : MonoBehaviour
 {
     public float speed = 8;
     public GameObject platform;
+    public GameObject level;
 
     private Rigidbody2D rg;
     //private float maxAngleInterval = 0.67f;
@@ -22,7 +23,7 @@ public class BallMove : MonoBehaviour
     {
         rbPlatform = platform.GetComponent<Rigidbody2D>();
         rg = GetComponent<Rigidbody2D>();
-        lvlRule = GetComponent<LevelsRule>();
+        lvlRule = level.GetComponent<LevelsRule>();
         isStarted = true;
         /*Vector2 dir = Vector2.up;
         dir.x = UnityEngine.Random.Range(-maxAngleInterval, maxAngleInterval);

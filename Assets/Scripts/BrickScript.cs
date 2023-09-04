@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class NewBehaviourScript : MonoBehaviour
 {
 
     public GameObject lrObj;
+    public GameObject Bonus;
+    [Range(0f, 1f)]
+    public float bonuce_Spawn_Chance;
+    [Range(1, 5)]
+    public int bonuce_Count_Chance;
 
     private Animator anim;
     private LevelsRule lvlRule;
     private bool isOk;
+    private Collider2D collader;
     void Start()
     {
+        //spawnBonuce = Range 
+        collader = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         anim.CrossFade("Shining", 0, 0, UnityEngine.Random.Range(0, 2f));
         anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
@@ -43,7 +52,16 @@ public class NewBehaviourScript : MonoBehaviour
 
     void brickBreak()
     {
-        GetComponent<Collider2D>().enabled = false;
+        collader.enabled = false;
         lvlRule.BrickDown();
+        if (UnityEngine.Random.Range(0.0f, 1.0f) > bonuce_Spawn_Chance)
+        {
+            for (int i = 0; i < UnityEngine.Random.Range(0, bonuce_Count_Chance); i++)
+            {
+                Instantiate(Bonus, GetComponent<Transform>().localPosition, Quaternion.identity);
+                Bonus.GetComponent<BonuseScr>().lvlRule = lvlRule;
+            }
+        }
+        //Bonus.
     }
 }

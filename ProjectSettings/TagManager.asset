@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Brick
   - Ball
+  - Bonus
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walls
   - Water
   - UI
   - 

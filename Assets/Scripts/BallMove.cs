@@ -56,7 +56,7 @@ public class BallMove : MonoBehaviour
     {
         if (isStarted)
         {
-            rg.position = rbPlatform.position + Vector2.up * 0.45f;
+            rg.position = rbPlatform.position + Vector2.up * 0.35f;
         }
     }
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2124791853859681554}
   - component: {fileID: 441065359633039190}
   - component: {fileID: 7497053384438158235}
-  - component: {fileID: 5245666385531677229}
   m_Layer: 0
   m_Name: Ball 1
   m_TagString: Ball
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.4393319, y: -4.65, z: 0.062405236}
-  m_LocalScale: {x: 1.6383494, y: 1.6383494, z: 1.6383494}
+  m_LocalScale: {x: 1.059111, y: 1.059111, z: 1.059111}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   platform: {fileID: 0}
+  level: {fileID: 0}
 --- !u!58 &7497053384438158235
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -164,17 +164,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.16000001
---- !u!114 &5245666385531677229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7755855999544137343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df8ec66fb635b94da090dc7a9e15235, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballCount: 3
-  bricksTotalCount: 40

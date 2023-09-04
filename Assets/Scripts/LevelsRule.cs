@@ -13,12 +13,14 @@ public class LevelsRule : MonoBehaviour
     //public GameObject thisObject;
 
     private TextMeshProUGUI livesInfo;
+    private TextMeshProUGUI scoreInfo;
     private TextMeshProUGUI PCaption;
     private GameObject pausePanel;
-    private int BricksBroke, bricksTotalCount;
+    private int BricksBroke, bricksTotalCount, goldCount;
 
     public void Start()
     {
+        goldCount = 0;
         BricksBroke = 0;
         bricksTotalCount = bricks.childCount;
         Debug.Log("bricksTotalCount = " + bricksTotalCount);
@@ -29,12 +31,17 @@ public class LevelsRule : MonoBehaviour
             if (this.gameObject.transform.GetChild(i).name == "Lives (TMP)")
             {
                 livesInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
-                Debug.Log("livesInfo");
+                //Debug.Log("livesInfo");
+            }
+            if (this.gameObject.transform.GetChild(i).name == "Score (TMP)")
+            {
+                scoreInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
+                //Debug.Log("livesInfo");
             }
             if (this.gameObject.transform.GetChild(i).name == "PausePanel")
             {
                 pausePanel = this.gameObject.transform.GetChild(i).GameObject();
-                Debug.Log("pausePanel");
+                //Debug.Log("pausePanel");
             }
         }
 
@@ -87,5 +94,11 @@ public class LevelsRule : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
+    }
+    public void CatchBonuce()
+    {
+        Debug.Log("CatchBonuce");
+        goldCount++;
+        scoreInfo.text = ("Gold: " + goldCount).ToString();
     }
 }

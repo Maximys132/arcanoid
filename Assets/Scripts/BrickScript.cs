@@ -18,6 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     private LevelsRule lvlRule;
     private bool isOk;
     private Collider2D collader;
+    private int health;
     void Start()
     {
         //spawnBonuce = Range 
@@ -28,6 +29,7 @@ public class NewBehaviourScript : MonoBehaviour
         lvlRule = lrObj.GetComponent<LevelsRule>();
         isOk = true;
         //lvlRule = 
+        health = anim.GetInteger("health");
     }
 
     void FixedUpdate() 
@@ -43,7 +45,8 @@ public class NewBehaviourScript : MonoBehaviour
         {
             if (isOk)
             {
-                anim.SetInteger("health", 0);
+                health--;
+                anim.SetInteger("health", health);
                 anim.speed = 2f;
                 isOk = false;
             }    
@@ -52,8 +55,17 @@ public class NewBehaviourScript : MonoBehaviour
 
     void brickBreak()
     {
-        collader.enabled = false;
-        lvlRule.BrickDown();
+        if (health == 0)
+        {
+            collader.enabled = false;
+            lvlRule.BrickDown();
+        }
+        else
+        {
+            isOk = true;
+            anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
+        }
+
         if (UnityEngine.Random.Range(0.0f, 1.0f) > bonuce_Spawn_Chance)
         {
             for (int i = 0; i < UnityEngine.Random.Range(0, bonuce_Count_Chance); i++)

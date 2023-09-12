@@ -29,6 +29,7 @@ public class NewBehaviourScript : MonoBehaviour
         lvlRule = lrObj.GetComponent<LevelsRule>();
         isOk = true;
         //lvlRule = 
+        //anim.SetInteger("health", health);
         health = anim.GetInteger("health");
     }
 

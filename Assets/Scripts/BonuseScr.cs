@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BonuseScr : MonoBehaviour
@@ -12,6 +13,7 @@ public class BonuseScr : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rg;
+    private bool cathed;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class BonuseScr : MonoBehaviour
         rg.angularVelocity = UnityEngine.Random.Range(10, 50f);
         if (UnityEngine.Random.Range(0, 1) > 0) 
             rg.angularVelocity = -rg.angularVelocity;
+        cathed = true;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         int rng = UnityEngine.Random.Range(1, 4);
@@ -40,11 +43,14 @@ public class BonuseScr : MonoBehaviour
         if (collision.CompareTag("Respawn"))
         {
             DestroyObject(this.gameObject, 0);
+            cathed = false;
         }/**/
         if (collision.CompareTag("Player"))
         {
             DestroyObject(this.gameObject, 0);
-            lvlRule.CatchBonuce();
+            if (cathed) 
+                lvlRule.CatchBonuce();
+            cathed = false;
         }
     }
 }

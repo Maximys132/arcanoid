@@ -42,12 +42,12 @@ public class BonuseScr : MonoBehaviour
     {
         if (collision.CompareTag("Respawn"))
         {
-            DestroyObject(this.gameObject, 0);
+            DestroyObject(this.gameObject, 0.1f);
             cathed = false;
         }/**/
         if (collision.CompareTag("Player"))
         {
-            DestroyObject(this.gameObject, 0);
+            DestroyObject(this.gameObject, 0.01f);
             if (cathed) 
                 lvlRule.CatchBonuce();
             cathed = false;

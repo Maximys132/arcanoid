@@ -39,16 +39,29 @@ public class NewBehaviourScript : MonoBehaviour
     [System.Obsolete]
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ball")) 
+        if (collision.gameObject.CompareTag("Ball"))
         {
+            damaged();
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        { 
+            damaged();
+        }
+
+    }
+
+    private void damaged()
+    {
             if (isOk)
             {
                 health--;
                 anim.SetInteger("health", health);
                 anim.speed = 2f;
                 isOk = false;
-            }    
-        }
+            }
     }
 
     void brickBreak()

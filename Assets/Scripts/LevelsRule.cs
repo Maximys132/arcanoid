@@ -7,6 +7,12 @@ public class LevelsRule : MonoBehaviour
 {
     public int ballCount = 3;
     public Transform bricks;
+    [SerializeField] public GameObject fireBall;
+    [SerializeField] public int fireBallCost;
+    [SerializeField] public Transform fireBallStartPosition;
+
+    [SerializeField] public GameObject electricity;
+    [SerializeField] public int electricityCost;
     //public GameObject thisObject;
 
     private TextMeshProUGUI livesInfo;
@@ -38,6 +44,16 @@ public class LevelsRule : MonoBehaviour
             if (this.gameObject.transform.GetChild(i).name == "PausePanel")
             {
                 pausePanel = this.gameObject.transform.GetChild(i).GameObject();
+                //Debug.Log("pausePanel");
+            }
+            if (this.gameObject.transform.GetChild(i).name == "cart_fireBall")
+            {
+                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (fireBallCost).ToString();
+                //Debug.Log("pausePanel");
+            }
+            if (this.gameObject.transform.GetChild(i).name == "cart_electicity")
+            {
+                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (electricityCost).ToString();
                 //Debug.Log("pausePanel");
             }
         }
@@ -103,5 +119,25 @@ public class LevelsRule : MonoBehaviour
         Debug.Log("CatchBonuce");
         goldCount++;
         scoreInfo.text = ("Gold: " + goldCount).ToString();
+    }
+    public void activateFireBall()
+    {
+        if (goldCount >= fireBallCost)
+        { 
+            Debug.Log("activateFireBall");
+            Instantiate(fireBall, fireBallStartPosition.position, Quaternion.identity);
+            goldCount -= fireBallCost;
+            scoreInfo.text = ("Gold: " + goldCount).ToString();
+        }
+    }
+    public void activateElectrisity()
+    {
+        if (goldCount >= electricityCost)
+        {
+            Debug.Log("activateFireBall");
+            Instantiate(electricity, fireBallStartPosition.position, Quaternion.identity);
+            goldCount -= electricityCost;
+            scoreInfo.text = ("Gold: " + goldCount).ToString();
+        }
     }
 }

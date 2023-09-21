@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class scr_Electricity : MonoBehaviour
@@ -19,6 +17,10 @@ public class scr_Electricity : MonoBehaviour
         if (collision.CompareTag("Brick"))
         {
             DestroyObject(gameObject, 0f);
+        }
+        if (collision.CompareTag("Respawn"))
+        {
+            DestroyObject(gameObject, 0.1f);
         }
     }
 }

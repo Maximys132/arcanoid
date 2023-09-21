@@ -64,12 +64,14 @@ public class NewBehaviourScript : MonoBehaviour
             }
     }
 
+    [System.Obsolete]
     void brickBreak()
     {
         if (health == 0)
         {
             collader.enabled = false;
             lvlRule.BrickDown();
+            DestroyObject(this.gameObject, 0.1f);
         }
         else
         {

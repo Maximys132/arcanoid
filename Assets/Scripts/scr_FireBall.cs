@@ -1,15 +1,14 @@
-
 using UnityEngine;
 
 public class scr_FireBall : MonoBehaviour
 {
-    [SerializeField] public Transform _startPos;
+    //[SerializeField] public Transform _startPos;
     [SerializeField] private int _speed = 8;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Transform>().position = _startPos.position;
+        //GetComponent<Transform>().position = _startPos.position;
         GetComponent<Rigidbody2D>().velocity = Vector2.up * _speed;
     }
 

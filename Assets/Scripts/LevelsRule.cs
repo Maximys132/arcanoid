@@ -84,14 +84,20 @@ public class LevelsRule : MonoBehaviour
         Debug.Log("Bricks crashed" + BricksBroke);
         if (BricksBroke >= bricksTotalCount)
         {
-            Debug.Log("You Win");
-            PCaption.text = "You Win";
-            pausePanel.SetActive(true);
-            Time.timeScale = 0f;
+            Invoke("wining", 1.5f);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
     }
+
+    private void wining()
+    {
+        Debug.Log("You Win");
+        PCaption.text = "You Win";
+        pausePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
     public void CatchBonuce()
     {
         Debug.Log("CatchBonuce");

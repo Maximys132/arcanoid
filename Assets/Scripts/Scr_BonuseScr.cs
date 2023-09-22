@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BonuseScr : MonoBehaviour
+public class Scr_BonuseScr : MonoBehaviour
 {
-    public LevelsRule lvlRule;
+    public Scr_LevelsRule lvlRule;
     public Sprite sprite1;
     public Sprite sprite2;
     public Sprite sprite3;

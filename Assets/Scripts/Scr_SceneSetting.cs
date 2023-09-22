@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSetting : MonoBehaviour
+public class Scr_SceneSetting : MonoBehaviour
 {
     public GameObject PausePanel;
     public int level;

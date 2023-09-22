@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BallMove : MonoBehaviour
+public class Scr_BallMove : MonoBehaviour
 {
     public float speed = 8;
     public GameObject platform;
@@ -10,14 +10,14 @@ public class BallMove : MonoBehaviour
     //private float maxAngleInterval = 0.67f;
     private Rigidbody2D rbPlatform;
     private bool isStarted;
-    private LevelsRule lvlRule;
+    private Scr_LevelsRule lvlRule;
 
     // Start is called before the first frame update
     void Start()
     {
         rbPlatform = platform.GetComponent<Rigidbody2D>();
         rg = GetComponent<Rigidbody2D>();
-        lvlRule = level.GetComponent<LevelsRule>();
+        lvlRule = level.GetComponent<Scr_LevelsRule>();
         isStarted = true;
         /*Vector2 dir = Vector2.up;
         dir.x = UnityEngine.Random.Range(-maxAngleInterval, maxAngleInterval);

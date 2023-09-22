@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class Scr_PlayerMove : MonoBehaviour
 {
     public float speed;
 

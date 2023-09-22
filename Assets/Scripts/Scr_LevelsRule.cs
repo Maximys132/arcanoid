@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.VisualScripting;
 
-public class LevelsRule : MonoBehaviour
+public class Scr_LevelsRule : MonoBehaviour
 {
     public int ballCount = 3;
     public Transform bricks;
@@ -125,7 +125,9 @@ public class LevelsRule : MonoBehaviour
         if (goldCount >= fireBallCost)
         { 
             Debug.Log("activateFireBall");
-            Instantiate(fireBall, fireBallStartPosition.position, Quaternion.identity);
+            Vector3 startPos = fireBallStartPosition.position;
+            startPos.y += 1;
+            Instantiate(fireBall, startPos, Quaternion.identity);
             goldCount -= fireBallCost;
             scoreInfo.text = ("Gold: " + goldCount).ToString();
         }

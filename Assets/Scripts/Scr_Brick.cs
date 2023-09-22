@@ -1,7 +1,7 @@
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Scr_Brick : MonoBehaviour
 {
 
     public GameObject lrObj;
@@ -12,7 +12,7 @@ public class NewBehaviourScript : MonoBehaviour
     public int bonuce_Count_Chance;
 
     private Animator anim;
-    private LevelsRule lvlRule;
+    private Scr_LevelsRule lvlRule;
     private bool isOk;
     private Collider2D collader;
     private int health;
@@ -21,13 +21,13 @@ public class NewBehaviourScript : MonoBehaviour
         //spawnBonuce = Range 
         collader = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
-        anim.CrossFade("Shining", 0, 0, UnityEngine.Random.Range(0, 2f));
+        health = anim.GetInteger("health");
+        anim.CrossFade("Brick_"+ health + "_Stay", 0, 0, UnityEngine.Random.Range(0, 2f));
         anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
-        lvlRule = lrObj.GetComponent<LevelsRule>();
+        lvlRule = lrObj.GetComponent<Scr_LevelsRule>();
         isOk = true;
         //lvlRule = 
         //anim.SetInteger("health", health);
-        health = anim.GetInteger("health");
     }
 
     void FixedUpdate() 
@@ -84,7 +84,7 @@ public class NewBehaviourScript : MonoBehaviour
             for (int i = 0; i < UnityEngine.Random.Range(0, bonuce_Count_Chance); i++)
             {
                 Instantiate(Bonus, GetComponent<Transform>().localPosition, Quaternion.identity);
-                Bonus.GetComponent<BonuseScr>().lvlRule = lvlRule;
+                Bonus.GetComponent<Scr_BonuseScr>().lvlRule = lvlRule;
             }
         }
         //Bonus.

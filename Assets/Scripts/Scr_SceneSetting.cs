@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class Scr_SceneSetting : MonoBehaviour
 {
     public GameObject PausePanel;
-    public int level;
 
     public void PauseButtonPress()
     {

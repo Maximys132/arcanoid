@@ -7,12 +7,6 @@ public class Scr_LevelsRule : MonoBehaviour
 {
     public int ballCount = 3;
     public Transform bricks;
-    [SerializeField] public GameObject fireBall;
-    [SerializeField] public int fireBallCost;
-    [SerializeField] public Transform fireBallStartPosition;
-
-    [SerializeField] public GameObject electricity;
-    [SerializeField] public int electricityCost;
     //public GameObject thisObject;
 
     private TextMeshProUGUI livesInfo;
@@ -44,16 +38,6 @@ public class Scr_LevelsRule : MonoBehaviour
             if (this.gameObject.transform.GetChild(i).name == "PausePanel")
             {
                 pausePanel = this.gameObject.transform.GetChild(i).GameObject();
-                //Debug.Log("pausePanel");
-            }
-            if (this.gameObject.transform.GetChild(i).name == "cart_fireBall")
-            {
-                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (fireBallCost).ToString();
-                //Debug.Log("pausePanel");
-            }
-            if (this.gameObject.transform.GetChild(i).name == "cart_electicity")
-            {
-                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (electricityCost).ToString();
                 //Debug.Log("pausePanel");
             }
         }
@@ -120,26 +104,13 @@ public class Scr_LevelsRule : MonoBehaviour
         goldCount++;
         scoreInfo.text = ("Gold: " + goldCount).ToString();
     }
-    public void activateFireBall()
+    public void addGold(int increm)
     {
-        if (goldCount >= fireBallCost)
-        { 
-            Debug.Log("activateFireBall");
-            Vector3 startPos = fireBallStartPosition.position;
-            startPos.y += 1;
-            Instantiate(fireBall, startPos, Quaternion.identity);
-            goldCount -= fireBallCost;
-            scoreInfo.text = ("Gold: " + goldCount).ToString();
-        }
+        goldCount += increm;
+        scoreInfo.text = ("Gold: " + goldCount).ToString();
     }
-    public void activateElectrisity()
+    public int getGold()
     {
-        if (goldCount >= electricityCost)
-        {
-            Debug.Log("activateFireBall");
-            Instantiate(electricity, fireBallStartPosition.position, Quaternion.identity);
-            goldCount -= electricityCost;
-            scoreInfo.text = ("Gold: " + goldCount).ToString();
-        }
+        return goldCount;
     }
 }

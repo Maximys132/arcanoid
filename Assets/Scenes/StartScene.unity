@@ -1710,6 +1710,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8585774393301808578, guid: e496aa497db24e8479eeaa4cbd1b7b22, type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 206802738}
     - target: {fileID: 8933591419435292994, guid: e496aa497db24e8479eeaa4cbd1b7b22, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

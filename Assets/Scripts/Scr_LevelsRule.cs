@@ -11,8 +11,8 @@ public class Scr_LevelsRule : MonoBehaviour
 
     private TextMeshProUGUI livesInfo;
     private TextMeshProUGUI scoreInfo;
-    private TextMeshProUGUI PCaption;
-    private GameObject pausePanel;
+    //private TextMeshProUGUI PCaption;
+    [SerializeField] private Scr_SceneSetting pausePanel;
     private int BricksBroke, bricksTotalCount, goldCount;
 
     public void Start()
@@ -35,22 +35,7 @@ public class Scr_LevelsRule : MonoBehaviour
                 scoreInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
                 //Debug.Log("livesInfo");
             }
-            if (this.gameObject.transform.GetChild(i).name == "PausePanel")
-            {
-                pausePanel = this.gameObject.transform.GetChild(i).GameObject();
-                //Debug.Log("pausePanel");
-            }
         }
-
-        for (int i = 0; i < pausePanel.transform.childCount; i++)
-        {
-            if (pausePanel.transform.GetChild(i).name == "PCaption (TMP)")
-            {
-                PCaption = pausePanel.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
-                Debug.Log("PCaption");
-            }
-        }
-        pausePanel.SetActive(false);
         livesInfo.text = (ballCount + " Lives").ToString();
     }
 
@@ -61,20 +46,13 @@ public class Scr_LevelsRule : MonoBehaviour
         livesInfo.text = (ballCount + " Lives").ToString();
         if (ballCount < 1)
         {
-            //Debug.Log("You lose");
-            PCaption.text = "You lose";
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            pausePanel.SetActive(true);
-            Time.timeScale = 0f;
-            
-
+            pausePanel.PauseButtonPress("You lose");
         }
     }
 
     public void LevelClear()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //PausePanel.SetActive(false);
         Time.timeScale = 1f;
     }
 
@@ -85,7 +63,6 @@ public class Scr_LevelsRule : MonoBehaviour
         if (BricksBroke >= bricksTotalCount)
         {
             Invoke("wining", 1.5f);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
     }
@@ -93,9 +70,7 @@ public class Scr_LevelsRule : MonoBehaviour
     private void wining()
     {
         Debug.Log("You Win");
-        PCaption.text = "You Win";
-        pausePanel.SetActive(true);
-        Time.timeScale = 0f;
+        pausePanel.PauseButtonPress("You Win");
     }
 
     public void CatchBonuce()

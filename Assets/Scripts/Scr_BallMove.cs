@@ -5,6 +5,7 @@ public class Scr_BallMove : MonoBehaviour
     public float speed = 8;
     public GameObject platform;
     public GameObject level;
+    public Joystick joystick;
 
     private Rigidbody2D rg;
     //private float maxAngleInterval = 0.67f;
@@ -41,7 +42,7 @@ public class Scr_BallMove : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetAxisRaw("Jump") > 0.01f)
+        if (Input.GetAxisRaw("Jump") > 0.01f || joystick.Vertical > 0.7f)
         {
             isStarted = false;
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Scr_PlayerMove : MonoBehaviour
 {
     public float speed;
+    public Joystick joystick;
 
     private Vector2 direction;
     private Rigidbody2D rb;
@@ -15,8 +16,16 @@ public class Scr_PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        direction.x = Input.GetAxisRaw("Horizontal");
-        direction.y = Input.GetAxisRaw("Vertical");
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            direction.x = Input.GetAxisRaw("Horizontal");
+        }
+        else
+        if (joystick.Horizontal != 0)
+        {
+            direction.x = joystick.Horizontal;
+        }
+        else direction.x = 0;
     }
 
     void FixedUpdate()

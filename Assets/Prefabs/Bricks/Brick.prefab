@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca646d32a90867469c0476d040a7b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lrObj: {fileID: 0}
+  lrObj: {fileID: 2628079287904077234, guid: 59f1e3e8a9c48634eb7ec24a48000943, type: 3}
   Bonus: {fileID: 6250377830817766801, guid: 044463a451152ad46929379a943ec6d1, type: 3}
   bonuce_Spawn_Chance: 0
   bonuce_Count_Chance: 5

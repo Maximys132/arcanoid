@@ -48,5 +48,10 @@ public class Scr_BonuseScr : MonoBehaviour
                 lvlRule.CatchBonuce();
             cathed = false;
         }
+        if (collision.CompareTag("Magnite"))
+        {
+            Vector2 newVelosity = (rg.position - Vector2.down) - collision.attachedRigidbody.position;
+            rg.velocity = newVelosity * (-4);
+        }
     }
 }

@@ -10,15 +10,19 @@ public class Scr_Brick : MonoBehaviour
     public float bonuce_Spawn_Chance;
     [Range(1, 5)]
     public int bonuce_Count_Chance;
+    [SerializeField] private AudioClip[] clips;
 
     private Animator anim;
     private Scr_LevelsRule lvlRule;
     private bool isOk;
     private Collider2D collader;
     private int health;
+    private AudioSource audioSrc;
+
     void Start()
     {
         //spawnBonuce = Range 
+        audioSrc = GetComponent<AudioSource>();
         collader = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         health = anim.GetInteger("health");
@@ -26,6 +30,7 @@ public class Scr_Brick : MonoBehaviour
         anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
         lvlRule = lrObj.GetComponent<Scr_LevelsRule>();
         isOk = true;
+        audioSrc.clip = clips[health - 1];
         //lvlRule = 
         //anim.SetInteger("health", health);
     }
@@ -57,6 +62,7 @@ public class Scr_Brick : MonoBehaviour
     {
             if (isOk)
             {
+                audioSrc.PlayOneShot(audioSrc.clip);
                 health--;
                 anim.SetInteger("health", health);
                 anim.speed = 2f;
@@ -75,6 +81,7 @@ public class Scr_Brick : MonoBehaviour
         }
         else
         {
+            audioSrc.clip = clips[health-1];
             isOk = true;
             anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
         }

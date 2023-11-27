@@ -6,16 +6,19 @@ public class Scr_BallMove : MonoBehaviour
     public GameObject platform;
     public GameObject level;
     public Joystick joystick;
+    [SerializeField] private AudioClip[] clips;
 
     private Rigidbody2D rg;
     //private float maxAngleInterval = 0.67f;
     private Rigidbody2D rbPlatform;
     private bool isStarted;
     private Scr_LevelsRule lvlRule;
+    private AudioSource audioSrc;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
         rbPlatform = platform.GetComponent<Rigidbody2D>();
         rg = GetComponent<Rigidbody2D>();
         lvlRule = level.GetComponent<Scr_LevelsRule>();
@@ -53,5 +56,12 @@ public class Scr_BallMove : MonoBehaviour
         {
             rg.position = rbPlatform.position + Vector2.up * 0.35f;
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if (!collision.gameObject.CompareTag("Player"))
+        //{
+            audioSrc.PlayOneShot(clips[UnityEngine.Random.Range(0, clips.Length)]);
+        //}
     }
 }

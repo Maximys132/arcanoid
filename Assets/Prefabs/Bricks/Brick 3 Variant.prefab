@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 801521539287036644, guid: b7b8b28100c164f439984cdd50b1527e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8421a72e211c6d349a677fd12762ea84, type: 3}
     - target: {fileID: 1595556003078488480, guid: b7b8b28100c164f439984cdd50b1527e, type: 3}
       propertyPath: m_Name
       value: Brick 3 Variant

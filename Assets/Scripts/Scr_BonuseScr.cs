@@ -6,13 +6,16 @@ public class Scr_BonuseScr : MonoBehaviour
     public Sprite sprite1;
     public Sprite sprite2;
     public Sprite sprite3;
+    [SerializeField] private AudioClip[] clips;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rg;
     private bool cathed;
+    private AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
         rg = GetComponent<Rigidbody2D>();
         Vector2 dir = Vector2.up;
         dir.x = UnityEngine.Random.Range(-1.3f, 1.3f);
@@ -43,7 +46,10 @@ public class Scr_BonuseScr : MonoBehaviour
         }/**/
         if (collision.CompareTag("Player"))
         {
-            DestroyObject(this.gameObject, 0.01f);
+            audioSrc.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+            audioSrc.PlayOneShot(audioSrc.clip);
+            spriteRenderer.enabled = false;
+            DestroyObject(this.gameObject, audioSrc.clip.length);
             if (cathed) 
                 lvlRule.CatchBonuce();
             cathed = false;

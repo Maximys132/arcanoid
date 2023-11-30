@@ -1,7 +1,7 @@
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 
-public class Scr_Brick : MonoBehaviour
+public class Scr_Brick : Scr_audio
 {
 
     public GameObject lrObj;
@@ -10,33 +10,31 @@ public class Scr_Brick : MonoBehaviour
     public float bonuce_Spawn_Chance;
     [Range(1, 5)]
     public int bonuce_Count_Chance;
-    [SerializeField] private AudioClip[] clips;
 
     private Animator anim;
     private Scr_LevelsRule lvlRule;
     private bool isOk;
-    private Collider2D collader;
+    private Collider2D[] collader;
     private int health;
-    private AudioSource audioSrc;
 
     void Start()
     {
         //spawnBonuce = Range 
-        audioSrc = GetComponent<AudioSource>();
-        collader = GetComponent<Collider2D>();
+        StartParent();
+        collader = GetComponents<Collider2D>();
+
         anim = GetComponent<Animator>();
         health = anim.GetInteger("health");
-        anim.CrossFade("Brick_"+ health + "_Stay", 0, 0, UnityEngine.Random.Range(0, 2f));
+        anim.CrossFade("Brick_" + health + "_Stay", 0, 0, UnityEngine.Random.Range(0, 2f));
         anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
         lvlRule = lrObj.GetComponent<Scr_LevelsRule>();
         isOk = true;
-        audioSrc.clip = clips[health - 1];
         //lvlRule = 
         //anim.SetInteger("health", health);
     }
 
-    void FixedUpdate() 
-    { 
+    void FixedUpdate()
+    {
         //if (health <= 0 )
 
     }
@@ -55,33 +53,33 @@ public class Scr_Brick : MonoBehaviour
         { 
             damaged();
         }
-
     }
 
     private void damaged()
     {
-            if (isOk)
-            {
-                audioSrc.PlayOneShot(audioSrc.clip);
-                health--;
-                anim.SetInteger("health", health);
-                anim.speed = 2f;
-                isOk = false;
-            }
+        if (isOk)
+        {
+            health--;
+            playSound(health);
+            anim.SetInteger("health", health);
+            anim.speed = 2f;
+            isOk = false;
+        }
     }
 
     [System.Obsolete]
     void brickBreak()
     {
+        lvlRule.BrickDamaged();
         if (health == 0)
         {
-            collader.enabled = false;
+            collader[0].enabled = false;
+            collader[1].enabled = false;
             lvlRule.BrickDown();
-            DestroyObject(this.gameObject, 0.1f);
+            DestroyObject(this.gameObject, getSoundLength());
         }
         else
         {
-            audioSrc.clip = clips[health-1];
             isOk = true;
             anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
         }
@@ -94,6 +92,11 @@ public class Scr_Brick : MonoBehaviour
                 Bonus.GetComponent<Scr_BonuseScr>().lvlRule = lvlRule;
             }
         }
-        //Bonus.
+
+    }
+    public void endAnim()
+    {
+        collader[0].enabled = true;
+        collader[1].enabled = true;
     }
 }

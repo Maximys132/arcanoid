@@ -1,21 +1,19 @@
 using UnityEngine;
 
-public class Scr_BonuseScr : MonoBehaviour
+public class Scr_BonuseScr : Scr_audio
 {
     public Scr_LevelsRule lvlRule;
     public Sprite sprite1;
     public Sprite sprite2;
     public Sprite sprite3;
-    [SerializeField] private AudioClip[] clips;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rg;
     private bool cathed;
-    private AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
     {
-        audioSrc = GetComponent<AudioSource>();
+        StartParent();
         rg = GetComponent<Rigidbody2D>();
         Vector2 dir = Vector2.up;
         dir.x = UnityEngine.Random.Range(-1.3f, 1.3f);
@@ -46,10 +44,9 @@ public class Scr_BonuseScr : MonoBehaviour
         }/**/
         if (collision.CompareTag("Player"))
         {
-            audioSrc.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
-            audioSrc.PlayOneShot(audioSrc.clip);
+            playRand();
             spriteRenderer.enabled = false;
-            DestroyObject(this.gameObject, audioSrc.clip.length);
+            DestroyObject(this.gameObject, getSoundLength());
             if (cathed) 
                 lvlRule.CatchBonuce();
             cathed = false;

@@ -9,35 +9,52 @@ public class Scr_cartsDecka : MonoBehaviour
 
     [SerializeField] public Transform platformPosition;
 
-    [SerializeField] public GameObject fireBall;
-    [SerializeField] public int fireBallCost;
+    [SerializeField] private GameObject fireBall;
+    [SerializeField] private int fireBallCost = 5;
 
-    [SerializeField] public GameObject electricity;
-    [SerializeField] public int electricityCost;
+    [SerializeField] private GameObject electricity;
+    [SerializeField] private int electricityCost = 5;
 
-    [SerializeField] public GameObject laser;
-    [SerializeField] public int laserCost;
+    [SerializeField] private GameObject laser;
+    [SerializeField] private int laserCost = 1;
 
+    [SerializeField] private GameObject magnitArea;
+    [SerializeField] private int magniteGoldCost = 5;
+    [SerializeField] private float magniteGoldTimer = 10;
 
+    [SerializeField] private int magniteBallCost = 1;
+
+    private float timerMG = 0;
+    private bool activMG = false;
     public void Start()
     {
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
-            if (this.gameObject.transform.GetChild(i).name == "cart_fireBall")
+            setLabel(i, "cart_fireBall", (fireBallCost).ToString());
+            setLabel(i, "cart_electicity", (electricityCost).ToString());
+            setLabel(i, "cart_laser", (laserCost).ToString());
+            setLabel(i, "cart_GMagn", (magniteGoldCost).ToString());
+            setLabel(i, "cart_BMagn", (magniteBallCost).ToString());
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (activMG)
+        {
+            timerMG = timerMG + UnityEngine.Time.deltaTime;
+            if (timerMG >= magniteGoldTimer)
             {
-                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (fireBallCost).ToString();
-                //Debug.Log("pausePanel");
+                disactivateMagnGold();
             }
-            if (this.gameObject.transform.GetChild(i).name == "cart_electicity")
-            {
-                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (electricityCost).ToString();
-                //Debug.Log("pausePanel");
-            }
-            if (this.gameObject.transform.GetChild(i).name == "cart_laser")
-            {
-                this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = (laserCost).ToString();
-                //Debug.Log("pausePanel");
-            }
+            //Debug.Log("timerMG  " + timerMG);
+        }
+    }
+    private void setLabel(int i, string name, string label)
+    {
+        if (this.gameObject.transform.GetChild(i).name == name)
+        {
+            this.gameObject.transform.GetChild(i).GameObject().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = label;
         }
     }
 
@@ -71,6 +88,24 @@ public class Scr_cartsDecka : MonoBehaviour
             Instantiate(laser, startPos, Quaternion.identity);
             LevelsRule.addGold(-laserCost);
         }
+    }
+    public void activateMagnGold()
+    {
+        Debug.Log("activate gold magnite");
+        magnitArea.transform.localScale = 30 * magnitArea.transform.localScale;
+        timerMG = 0;
+        activMG = true;
+    }
+    public void disactivateMagnGold()
+    {
+        Debug.Log("disactivate gold magnite");
+        magnitArea.transform.localScale = magnitArea.transform.localScale / 30;
+        timerMG = 0;
+        activMG = false;
+    }
+    public void activateMagnBall()
+    {
+        activateFireBall();
     }
 
 

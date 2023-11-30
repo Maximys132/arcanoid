@@ -1961,6 +1961,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec295f595e0fbd04d9d12e1735176919, type: 3}
+--- !u!1 &1270861731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6133258606533655700, guid: 9f8b4e20ece7f0d44993ba770ad00ba6, type: 3}
+  m_PrefabInstance: {fileID: 3234634147060610002}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1288038024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 212430595114695696, guid: 334a00a7781b0ac409cc332023c018e0, type: 3}
@@ -3657,6 +3662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3793433484042853086, guid: 59f1e3e8a9c48634eb7ec24a48000943, type: 3}
+      propertyPath: magnitArea
+      value: 
+      objectReference: {fileID: 1270861731}
     - target: {fileID: 3793433484042853086, guid: 59f1e3e8a9c48634eb7ec24a48000943, type: 3}
       propertyPath: platformPosition
       value: 

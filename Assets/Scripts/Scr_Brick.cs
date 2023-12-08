@@ -25,7 +25,7 @@ public class Scr_Brick : Scr_audio
 
         anim = GetComponent<Animator>();
         health = anim.GetInteger("health");
-        anim.CrossFade("Brick_" + health + "_Stay", 0, 0, UnityEngine.Random.Range(0, 2f));
+        //anim.CrossFade("Brick_" + health + "_Stay", 0, 0, UnityEngine.Random.Range(0, 2f));
         anim.speed = UnityEngine.Random.Range(0.5f, 1.5f);
         lvlRule = lrObj.GetComponent<Scr_LevelsRule>();
         isOk = true;

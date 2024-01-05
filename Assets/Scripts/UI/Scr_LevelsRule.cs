@@ -3,21 +3,24 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
+using System;
+using UnityEngine.Events;
 
 public class Scr_LevelsRule : MonoBehaviour
 {
     public int ballCount = 3;
     public Transform bricks;
-    //public GameObject thisObject;
+
+    public UnityEvent<int> OnScoreChangedEvent = new UnityEvent<int>();
+    public UnityEvent<int> OnGoldChangedEvent = new UnityEvent<int>();
+
+
 
     private TextMeshProUGUI livesInfo;
-    private TextMeshProUGUI scoreInfo;
-    private TextMeshProUGUI timeInfo;
-    private TextMeshProUGUI GoldInfo;
     //private TextMeshProUGUI PCaption;
     [SerializeField] private Scr_SceneSetting pausePanel;
     private int BricksBroke, bricksTotalCount, bricksHPCount, goldCount, score, totalStars;
-    private float timer = 0, dtime = 0;
+    private float dtime = 0;
 
     public void Start()
     {
@@ -40,27 +43,13 @@ public class Scr_LevelsRule : MonoBehaviour
             {
                 livesInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
             }
-            if (this.gameObject.transform.GetChild(i).name == "Gold (TMP)")
-            {
-                GoldInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
-            }
-            if (this.gameObject.transform.GetChild(i).name == "Score (TMP)")
-            {
-                scoreInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
-            }
-            if (this.gameObject.transform.GetChild(i).name == "Time (TMP)")
-            {
-                timeInfo = this.gameObject.transform.GetChild(i).GameObject().GetComponent<TextMeshProUGUI>();
-            }
         }
         livesInfo.text = (ballCount + " Lives").ToString();
     }
     
     private void FixedUpdate()
     {
-        timer = timer + Time.deltaTime;
         dtime = dtime + Time.deltaTime;
-        timeInfo.text = ("Time   : " + timer.ToString("F2")).ToString();
     }
 
     public void BallFall()
@@ -68,8 +57,7 @@ public class Scr_LevelsRule : MonoBehaviour
         Debug.Log("Ball down");
         ballCount--;
         livesInfo.text = (ballCount + " Lives").ToString();
-        score = score - 2000;
-        scoreInfo.text = ("Score : " + score.ToString());
+        ChangeScore(-2000);
         if (ballCount < 1)
         {
             pausePanel.PauseButtonPress("You lose");
@@ -95,9 +83,13 @@ public class Scr_LevelsRule : MonoBehaviour
 
     public void BrickDamaged()
     {
-        score = (int)(score + 500 - dtime * 10);
+        ChangeScore((int)(500 - dtime * 10));
         dtime = 0;
-        scoreInfo.text = ("Score : " + score.ToString());
+    }
+    public void ChangeScore(int incr = 0)
+    {
+        score = score + incr;
+        OnScoreChangedEvent.Invoke(score);
     }
 
     private void wining()
@@ -111,14 +103,13 @@ public class Scr_LevelsRule : MonoBehaviour
 
     public void CatchBonuce()
     {
-        Debug.Log("CatchBonuce");
-        goldCount++;
-        GoldInfo.text = ("Gold: " + goldCount).ToString();
+        //Debug.Log("CatchBonuce");
+        addGold(1);
     }
     public void addGold(int increm)
     {
         goldCount += increm;
-        GoldInfo.text = ("Gold: " + goldCount).ToString();
+        OnGoldChangedEvent.Invoke(goldCount);
     }
     public int getGold()
     {

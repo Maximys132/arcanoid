@@ -31,7 +31,7 @@ public class Scr_BonuseScr : Scr_audio
             spriteRenderer.sprite = sprite2;
         if (rng == 3)
             spriteRenderer.sprite = sprite3;
-        Debug.Log("Rand " + rng);
+        //Debug.Log("Rand " + rng);
     }
 
     [System.Obsolete]

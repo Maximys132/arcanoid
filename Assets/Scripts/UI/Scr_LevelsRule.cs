@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEngine.SocialPlatforms.Impl;
-using System;
 using UnityEngine.Events;
 
 public class Scr_LevelsRule : MonoBehaviour

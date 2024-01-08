@@ -42,13 +42,12 @@ public class Scr_BonuseScr : Scr_audio
             DestroyObject(this.gameObject, 0.1f);
             cathed = false;
         }/**/
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && cathed)
         {
             playRand();
             spriteRenderer.enabled = false;
             DestroyObject(this.gameObject, getSoundLength());
-            if (cathed) 
-                lvlRule.CatchBonuce();
+            lvlRule.CatchBonuce();
             cathed = false;
         }
         if (collision.CompareTag("Magnite"))

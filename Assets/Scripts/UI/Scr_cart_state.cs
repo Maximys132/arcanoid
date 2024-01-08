@@ -47,6 +47,7 @@ public class Scr_cart_state : MonoBehaviour
         //Debug.Log("cooldown " + anim.GetBool("cooldown") + ", enable " + anim.GetBool("enable"));
         if (!isCD && anim.GetBool("enable"))
         {
+            spel.spelTimer = cd_time;
             spel.Invoke(spelName, 0f);
             spel.LevelsRule.addGold(-cost);
             isCD = true;
